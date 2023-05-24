@@ -7,5 +7,5 @@ async function logout() {
     return;
   }
 
-  window.location.href = "/login";
+  window.location.href = "/auth/login";
 }

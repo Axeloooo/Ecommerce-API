@@ -7,6 +7,14 @@ class UserRepository {
     this.#userDao = userDao;
   }
 
+  async getUserById(id) {
+    try {
+      return userDao.getUserById(id);
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
   async postRegister(user) {
     try {
       return userDao.postRegister(user);

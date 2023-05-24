@@ -1,2 +1,5 @@
-export const MONGO_URL =
-  "mongodb+srv://Axeloooo:AxOmSaPe15092002@mongodb.j4lpxxj.mongodb.net/?retryWrites=true&w=majority";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+export const MONGO_URL = process.env.MONGO_URL;

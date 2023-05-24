@@ -2,27 +2,27 @@ import { userRepository } from "../../repositories/user.repository.js";
 
 export async function postRegister(req, res) {
   try {
-    const newUser = req.body;
-    const user = await userRepository.postRegister(newUser);
-    if (!user) {
-      res.status(400).json({
-        statusCode: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        success: false,
-        body: {
-          message: "Client Error",
-        },
-      });
-    }
-    req.session.user = {
-      email: user.email,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      age: user.age,
-      rol: user.rol,
-    };
+    // const newUser = req.body;
+    // const user = await userRepository.postRegister(newUser);
+    // if (!user) {
+    //   res.status(400).json({
+    //     statusCode: 400,
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     success: false,
+    //     body: {
+    //       message: "Client Error",
+    //     },
+    //   });
+    // }
+    // req.session.user = {
+    //   email: user.email,
+    //   first_name: user.first_name,
+    //   last_name: user.last_name,
+    //   age: user.age,
+    //   rol: user.rol,
+    // };
     res.status(200).redirect("/products");
   } catch (error) {
     res.status(500).json({
@@ -73,7 +73,7 @@ export async function postLogin(req, res) {
 
 export async function postLogout(req, res) {
   try {
-    req.session.destroy((error) => {
+    req.logout((error) => {
       if (error) {
         res.status(400).json({
           statusCode: 400,
@@ -99,6 +99,22 @@ export async function postLogout(req, res) {
       }
     });
   } catch (error) {
+    res.status(500).json({
+      statusCode: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      success: false,
+      body: { error: "Server Error" },
+    });
+  }
+}
+
+export async function postGitHubLogin(req, res) {
+  try {
+    req.session.user = req.user;
+    res.status(200).redirect("/products");
+  } catch (err) {
     res.status(500).json({
       statusCode: 500,
       headers: {

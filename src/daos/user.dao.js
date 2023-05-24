@@ -7,6 +7,15 @@ class UserDao {
     this.#userModel = userModel;
   }
 
+  async getUserById(id) {
+    try {
+      const res = await userModel.findById(id);
+      return res;
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
   async postRegister(user) {
     try {
       const res = await userModel.create({
@@ -27,7 +36,6 @@ class UserDao {
     try {
       const res = await userModel.findOne({
         email: user.email,
-        password: user.password,
       });
       return res;
     } catch (err) {
@@ -46,7 +54,6 @@ const userSchema = new Schema(
     },
     last_name: {
       type: String,
-      required: true,
     },
     email: {
       type: String,
@@ -55,15 +62,12 @@ const userSchema = new Schema(
     },
     age: {
       type: Number,
-      required: true,
     },
     password: {
       type: String,
-      required: true,
     },
     rol: {
       type: String,
-      required: true,
     },
   },
   {
