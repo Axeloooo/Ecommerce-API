@@ -4,13 +4,13 @@ import { Router } from "express";
 
 import * as sessionController from "../../controllers/api/session.controller.js";
 
-import { rol } from "../../middlewares/rol.middleware.js";
+import { role } from "../../middlewares/role.middleware.js";
 
 export const sessionsApiRouter = Router();
 
 sessionsApiRouter.post(
   "/register",
-  rol,
+  role,
   passport.authenticate("register"),
   sessionController.postRegister
 );

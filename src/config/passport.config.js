@@ -17,17 +17,20 @@ export function initializePassport() {
       { passReqToCallback: true, usernameField: "email" },
       async (req, _u, _p, done) => {
         try {
-          const { firstName, lastName, email, age, password, rol } = req.body;
+          const { firstName, lastName, email, age, password, role } = req.body;
+          const user = await userRepository.getUserByEmail(email);
+          if (user) {
+            return done(null, false);
+          }
           const newUser = new User(
             firstName,
             lastName,
             email,
             age,
             createHash(password),
-            rol
+            role
           );
-          console.log(newUser);
-          const res = await userRepository.postRegister(newUser);
+          const res = await userRepository.postUser(newUser);
           return done(null, res);
         } catch (err) {
           return done(err);
@@ -40,12 +43,9 @@ export function initializePassport() {
     "login",
     new localStrategy({ usernameField: "email" }, async (_u, _p, done) => {
       try {
-        const user = await userRepository.postLogin({
-          email: _u,
-        });
-        console.log(user);
+        const user = await userRepository.getUserByEmail(_u);
         if (!user) {
-          return done(new Error());
+          return done(null, false);
         }
         if (!isValidPassword(user, _p)) {
           return done(null, false);
@@ -67,9 +67,7 @@ export function initializePassport() {
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
-          const user = await userRepository.postLogin({
-            email: profile._json.email,
-          });
+          const user = await userRepository.getUserByEmail(profile._json.email);
           if (!user) {
             const newUser = {
               firstName: profile._json.name,
@@ -77,9 +75,9 @@ export function initializePassport() {
               age: "",
               email: profile._json.email,
               password: "",
-              rol: "",
+              role: "",
             };
-            const res = await userRepository.postRegister(newUser);
+            const res = await userRepository.postUser(newUser);
             return done(null, res);
           } else {
             return done(null, user);

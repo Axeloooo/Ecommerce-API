@@ -2,27 +2,6 @@ import { userRepository } from "../../repositories/user.repository.js";
 
 export async function postRegister(req, res) {
   try {
-    // const newUser = req.body;
-    // const user = await userRepository.postRegister(newUser);
-    // if (!user) {
-    //   res.status(400).json({
-    //     statusCode: 400,
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     success: false,
-    //     body: {
-    //       message: "Client Error",
-    //     },
-    //   });
-    // }
-    // req.session.user = {
-    //   email: user.email,
-    //   first_name: user.first_name,
-    //   last_name: user.last_name,
-    //   age: user.age,
-    //   rol: user.rol,
-    // };
     res.status(200).redirect("/products");
   } catch (error) {
     res.status(500).json({
@@ -38,8 +17,8 @@ export async function postRegister(req, res) {
 
 export async function postLogin(req, res) {
   try {
-    const loggedUser = req.body;
-    const user = await userRepository.postLogin(loggedUser);
+    const { email } = req.body;
+    const user = await userRepository.getUserByEmail(email);
     if (!user) {
       res.status(404).json({
         statusCode: 404,

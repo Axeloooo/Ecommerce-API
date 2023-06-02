@@ -16,7 +16,7 @@ class UserDao {
     }
   }
 
-  async postRegister(user) {
+  async postUser(user) {
     try {
       const res = await userModel.create({
         first_name: user.firstName,
@@ -24,7 +24,7 @@ class UserDao {
         email: user.email,
         age: user.age,
         password: user.password,
-        rol: user.rol,
+        role: user.role,
       });
       return res;
     } catch (err) {
@@ -32,10 +32,10 @@ class UserDao {
     }
   }
 
-  async postLogin(user) {
+  async getUserByEmail(email) {
     try {
       const res = await userModel.findOne({
-        email: user.email,
+        email: email,
       });
       return res;
     } catch (err) {
@@ -66,7 +66,7 @@ const userSchema = new Schema(
     password: {
       type: String,
     },
-    rol: {
+    role: {
       type: String,
     },
   },

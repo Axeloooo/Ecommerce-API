@@ -1,4 +1,4 @@
-export function log(req, res, next) {
+export function authenticate(req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {

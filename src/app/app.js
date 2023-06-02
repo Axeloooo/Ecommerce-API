@@ -23,12 +23,12 @@ import { loginAuthRouter } from "../routes/auth/login.router.js";
 
 // Middleware imports
 import session from "../middlewares/session.middleware.js";
-import { log } from "../middlewares/log.middleware.js";
+import { authenticate } from "../middlewares/authenticate.middleware.js";
 import { errorHandler } from "../middlewares/error.middleware.js";
 
 const app = express();
 
-const connection = await connectDatabase();
+await connectDatabase();
 
 app.engine("handlebars", handlebars.engine());
 
@@ -50,13 +50,13 @@ app.use("/auth/register", registerAuthRouter);
 app.use("/auth/login", loginAuthRouter);
 
 // Api routes
-app.use("/api/carts", cartsApiRouter);
-app.use("/api/products", productsApiRouter);
+app.use("/api/carts", authenticate, cartsApiRouter);
+app.use("/api/products", authenticate, productsApiRouter);
 app.use("/api/sessions", sessionsApiRouter);
 
 // Web routes
-app.use("/carts", log, cartsViewsRouter);
-app.use("/products", log, productsViewsRouter);
+app.use("/carts", authenticate, cartsViewsRouter);
+app.use("/products", authenticate, productsViewsRouter);
 
 app.get("/", (req, res, next) => {
   try {
@@ -72,6 +72,6 @@ app.get("/", (req, res, next) => {
 // Errors middleware
 app.use(errorHandler);
 
-const server = app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}!`);
 });

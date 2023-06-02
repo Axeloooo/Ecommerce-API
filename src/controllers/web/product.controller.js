@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export async function getProducts(req, res) {
+  console.log("here");
   const limit = req.query.lim;
   const page = req.query.page;
   const sort = req.query.sort;
@@ -21,8 +22,8 @@ export async function getProducts(req, res) {
       },
     }
   );
+  console.log(response.data);
   const data = response.data;
-  console.log(data.body);
   let user = {
     name: "Products View",
     products: data.body,

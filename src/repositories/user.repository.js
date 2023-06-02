@@ -15,17 +15,17 @@ class UserRepository {
     }
   }
 
-  async postRegister(user) {
+  async postUser(user) {
     try {
-      return userDao.postRegister(user);
+      return userDao.postUser(user);
     } catch (err) {
       throw new Error(err);
     }
   }
 
-  async postLogin(user) {
+  async getUserByEmail(email) {
     try {
-      return userDao.postLogin(user);
+      return userDao.getUserByEmail(email);
     } catch (err) {
       throw new Error(err);
     }
