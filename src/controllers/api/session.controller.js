@@ -2,7 +2,16 @@ import { userRepository } from "../../repositories/user.repository.js";
 
 export async function postRegister(req, res) {
   try {
-    res.status(200).redirect("/products");
+    res.status(200).json({
+      statusCode: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      success: true,
+      body: {
+        message: "Ok",
+      },
+    });
   } catch (error) {
     res.status(500).json({
       statusCode: 500,
@@ -37,7 +46,16 @@ export async function postLogin(req, res) {
       last_name: user.last_name,
       age: user.age,
     };
-    res.status(200).redirect("/products");
+    res.status(200).json({
+      statusCode: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      success: true,
+      body: {
+        message: "Ok",
+      },
+    });
   } catch (error) {
     res.status(500).json({
       statusCode: 500,

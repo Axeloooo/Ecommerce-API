@@ -4,15 +4,15 @@ export class User {
   #email;
   #age;
   #password;
-  #rol;
+  #role;
 
-  constructor(firstName, lastName, email, age, password, rol) {
+  constructor(firstName, lastName, email, age, password, role) {
     this.#firstName = firstName;
     this.#lastName = lastName;
     this.#email = email;
     this.#age = age;
     this.#password = password;
-    this.#rol = rol;
+    this.#role = role;
   }
 
   get firstName() {
@@ -55,11 +55,11 @@ export class User {
     this.#password = password;
   }
 
-  get rol() {
-    return this.#rol;
+  get role() {
+    return this.#role;
   }
 
-  set rol(rol) {
-    this.#rol = rol;
+  set role(role) {
+    this.#role = role;
   }
 }

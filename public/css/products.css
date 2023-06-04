@@ -1,0 +1,88 @@
+* {
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f8f8;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.products-container {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f8f8f8;
+}
+.pagination-container {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f8f8f8;
+}
+.paging-container {
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;  
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+}
+
+.logout-btn {
+  background-color: white;
+  color: crimson;
+  padding: 10px;
+  border: 1px solid crimson;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+.logout-btn:hover {
+  background-color: crimson;
+  color: white;
+  padding: 10px;
+  border: 1px solid crimson;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+.add-product-btn {
+  background-color: white;
+  color: #006241;
+  padding: 10px;
+  border: 1px solid #006241;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+.add-product-btn:hover {
+  background-color: #006241;
+  color: white;
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}

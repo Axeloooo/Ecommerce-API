@@ -1,49 +1,25 @@
-<div>
-  <h1>{{name}}</h1>
-</div>
+<header>
+  <div>
+    <h1>{{name}}</h1>
+  </div>
+  <div class="profile-container">
+    <h5>{{user}}</h5>
+    <button type="button" id="logout-btn" class="logout-btn">Logout</button>
+  </div>
+</header>
+<hr>
+<main>
+  <div>
+    <div id="product-container" class="products-container">
+      <h2>Products</h2>
+    </div>
+    <div id="pagination-container" class="pagination-container"></div>
+  </div>
+</main>
+<hr>
+<footer>
+  <div id="paging-container" class="paging-container"></div>
+  <p>Axel Sánchez &copy; 2023</p>
+</footer>
 
-<button type="button" onclick="logout()">Logout</button>
-
-<div>
-  <h2>Products:</h2>
-  {{#each products.docs}}
-  <ul>
-    <li>Title: {{this.title}}</li>
-    <li>Id: {{this.id}}</li>
-    <li>Description: {{this.description}}</li>
-    <li>Code: {{this.code}}</li>
-    <li>Price: {{this.price}}</li>
-    <li>Status: {{this.status}}</li>
-    <li>Stock: {{this.stock}}</li>
-    <li>Category: {{this.category}}</li>
-    <li>Thumbnails: 
-        <ul>
-          {{#each this.thumbnails}}
-          <li>{{this}}</li>
-          {{/each}}
-        </ul>
-      </li>
-  </ul>
-  {{/each}}
-</div>
-
-<div>
-  <h2>Pagination Options:</h2>
-  <ul>
-    <li>Total docs: {{products.totalDocs}}</li>
-    <li>Limit: {{products.limit}}</li>
-    <li>Total pages: {{products.totalPages}}</li>
-    <li>Page: {{products.page}}</li>
-    <li>Paging counter: {{products.pagingCounter}}</li>
-    <li>Has previous page: {{products.hasPrevPage}}</li>
-    <li>Has next page: {{products.hasNextPage}}</li>
-    <li>Previous page: {{products.prevPage}}</li>
-    <li>Next Page: {{products.nextPage}}</li>
-  </ul>
-</div>
-
-<a href="http://localhost:8080/products/?lim={{products.limit}}&page={{products.prevPage}}">Prev</a>
-<p>{{products.page}}</p>
-<a href="http://localhost:8080/products/?lim={{products.limit}}&page={{products.nextPage}}">Next</a>
-
-<script src="./js/index.js"></script>
+<script src="/js/products.js"></script>

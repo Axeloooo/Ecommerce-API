@@ -1,8 +1,7 @@
 <h1>{{title}}</h1>
 
-<form action="http://localhost:8080/api/sessions/login" method="post">
+<form id="login-form" class="login-form">
   <fieldset>
-    <legend>Login</legend>
     
     <label for="email">Email:</label><br>
     <input type="email" name="email" placeholder="Email" required><br>
@@ -12,14 +11,16 @@
 
     <hr>
 
-    <input type="submit" value="Login">
+    <input type="submit" value="Login" id="login-btn" class="login-btn">
   </fieldset>
 </form>
 
 <div>
-  <a href="http://localhost:8080/auth/register"><button>Register</button></a>
+  <a href="http://localhost:8080/auth/register"><button class="register-btn">Register</button></a>
 </div>
 
 <div>
-  <a href="http://localhost:8080/api/sessions/github"><button>Login with GitHub</button></a>
+  <a href="http://localhost:8080/api/sessions/github"><button class="login-github-btn">Login with GitHub</button></a>
 </div>
+
+<script src="/js/login.js"></script>

@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f8f8f8;
+}
+.login-btn {
+  background-color: white;
+  color: #006241;
+  padding: 10px;
+  border: 1px solid #006241;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+.login-btn:hover {
+  background-color: #006241;
+  color: white;
+}
+.login-github-btn {
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+.login-github-btn:hover {
+  background-color: black;
+  color: white;
+}
+.register-btn {
+  background-color: white;
+  color: lightskyblue;
+  padding: 10px;
+  border: 1px solid lightskyblue;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+.register-btn:hover {
+  background-color: lightskyblue;
+  color: white;
+}
