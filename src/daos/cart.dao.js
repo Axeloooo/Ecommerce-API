@@ -7,9 +7,20 @@ class CartDao {
     this.#cartModel = cartModel;
   }
 
+  async getCarts() {
+    try {
+      const res = await this.#cartModel.find();
+      return res;
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
   async getCartById(cid) {
     try {
-      const res = await cartModel.findById(cid).populate("products.product");
+      const res = await this.#cartModel
+        .findById(cid)
+        .populate("products.product");
       return res;
     } catch (err) {
       throw new Error(err);
@@ -18,7 +29,7 @@ class CartDao {
 
   async postCart() {
     try {
-      const res = await cartModel.create({ products: [] });
+      const res = await this.#cartModel.create({ products: [] });
       return res;
     } catch (err) {
       throw new Error(err);
@@ -27,7 +38,7 @@ class CartDao {
 
   async postProductInCartById(cid, pid) {
     try {
-      const cart = await cartModel.findById(cid);
+      const cart = await this.#cartModel.findById(cid);
       for (let item of cart.products) {
         if (item.product._id == pid) {
           item.quantity += 1;
@@ -48,7 +59,7 @@ class CartDao {
 
   async putCartById(cid, data) {
     try {
-      const cart = await cartModel.findById(cid);
+      const cart = await this.#cartModel.findById(cid);
       cart.products = data;
       const res = cart.save();
       return res;
@@ -59,7 +70,7 @@ class CartDao {
 
   async putProductInCartById(cid, pid, data) {
     try {
-      const cart = await cartModel.findById(cid);
+      const cart = await this.#cartModel.findById(cid);
       for (let item of cart.products) {
         if (item.product._id == pid) {
           item.quantity = data.quantity;
@@ -74,7 +85,7 @@ class CartDao {
 
   async deleteCartById(cid) {
     try {
-      const cart = await cartModel.findById(cid);
+      const cart = await this.#cartModel.findById(cid);
       cart.products = [];
       const res = await cart.save();
       return res;
@@ -85,8 +96,10 @@ class CartDao {
 
   async deleteProductInCartById(cid, pid) {
     try {
-      let cart = await cartModel.findById(cid);
-      cart.products = cart.products.filter((item) => item.product._id != pid);
+      let cart = await this.#cartModel.findById(cid);
+      cart.products = cart.products.filter(
+        (item) => !item.product._id.equals(pid)
+      );
       const res = await cart.save();
       return res;
     } catch (err) {

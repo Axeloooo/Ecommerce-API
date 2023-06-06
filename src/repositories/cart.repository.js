@@ -7,6 +7,14 @@ class CartRepository {
     this.#cartDao = cartDao;
   }
 
+  async getCarts() {
+    try {
+      return cartDao.getCarts();
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
   async getCartById(cid) {
     try {
       return cartDao.getCartById(cid);

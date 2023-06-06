@@ -15,11 +15,11 @@ logoutBtn.addEventListener("click", async function (event) {
   event.preventDefault();
   const res = await fetch("http://localhost:8080/api/sessions/logout");
   const data = await res.json();
-  console.log(data);
   if (!data.success) {
     console.error("Logout failed");
     return;
   }
+  localStorage.removeItem("cartId");
   window.location.href = "/auth/login";
 });
 

@@ -36,6 +36,7 @@ registerForm.addEventListener("submit", async (event) => {
     });
     const newCart = await fetchNewCart.json();
     if (newCart.success) {
+      localStorage.setItem("cartId", newCart.body.cart._id);
       window.location.href = "/products";
     }
   }
