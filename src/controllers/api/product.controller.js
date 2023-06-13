@@ -1,11 +1,17 @@
 import { productRepository } from "../../repositories/product.repository.js";
 
+import {
+  ServerError,
+  NotFoundError,
+  ClientError,
+} from "../../errors/errors.js";
+
 /**
  *  @desc   Get products
  *  route   GET api/products
  *  @access Private
  */
-export async function getProducts(req, res) {
+export async function getProducts(req, res, next) {
   try {
     const limit = req.query.lim;
     const page = req.query.page;
@@ -18,12 +24,11 @@ export async function getProducts(req, res) {
       query
     );
     if (!products) {
-      res.status(404).json({ body: "Not Found" });
+      return next(new NotFoundError("Not Found"));
     }
     res.status(200).json({ body: products });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ body: "Server Error" });
+    return next(new ServerError("Server Error"));
   }
 }
 
@@ -32,17 +37,16 @@ export async function getProducts(req, res) {
  *  route   GET api/products/:pid
  *  @access Private
  */
-export async function getProductById(req, res) {
+export async function getProductById(req, res, next) {
   try {
     const pid = req.params.pid;
     const product = await productRepository.getProductById(pid);
     if (!product) {
-      res.status(404).json({ body: "Not Found" });
+      return next(new NotFoundError("Not Found"));
     }
     res.status(200).json({ body: product });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ body: "Server Error" });
+    return next(new ServerError("Server Error"));
   }
 }
 
@@ -51,17 +55,16 @@ export async function getProductById(req, res) {
  *  route   POST api/products
  *  @access Private
  */
-export async function postProduct(req, res) {
+export async function postProduct(req, res, next) {
   try {
     const product = req.body;
     const newProduct = await productRepository.postProduct(product);
     if (!newProduct) {
-      res.status(400).json({ body: "Client Error" });
+      return next(new NotFoundError("Not Found"));
     }
     res.status(201).json({ body: newProduct });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ body: "Server Error" });
+    return next(new ServerError("Server Error"));
   }
 }
 
@@ -70,18 +73,17 @@ export async function postProduct(req, res) {
  *  route   PUT api/products/:pid
  *  @access Private
  */
-export async function putProduct(req, res) {
+export async function putProduct(req, res, next) {
   try {
     const pid = req.params.pid;
     const product = req.body;
     const updatedProduct = await productRepository.putProduct(pid, product);
     if (!updatedProduct) {
-      res.status(400).json({ body: "Client Error" });
+      return next(new ClientError("Client Error"));
     }
     res.status(200).json({ body: updatedProduct });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ body: "Server Error" });
+    return next(new ServerError("Server Error"));
   }
 }
 
@@ -90,16 +92,15 @@ export async function putProduct(req, res) {
  *  route   DELETE api/products/:pid
  *  @access Private
  */
-export async function deleteProductById(req, res) {
+export async function deleteProductById(req, res, next) {
   try {
     const pid = req.params.pid;
     const deletedProduct = await productRepository.deleteProductById(pid);
     if (!deletedProduct) {
-      res.status(400).json({ body: "Client Error" });
+      return next(new ClientError("Client Error"));
     }
     res.status(200).json({ body: deletedProduct });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ body: "Server Error" });
+    return next(new ServerError("Server Error"));
   }
 }

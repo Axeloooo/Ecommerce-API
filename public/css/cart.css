@@ -35,20 +35,6 @@ footer {
   margin-bottom: 10px;
   background-color: #f8f8f8;
 }
-.pagination-container {
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f8f8f8;
-}
-.paging-container {
-  padding: 10px;
-  margin-bottom: 10px;
-  display: flex;  
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  gap: 10px;
-}
 
 .logout-btn {
   background-color: white;
@@ -68,7 +54,7 @@ footer {
   cursor: pointer;
   margin: 10px;
 }
-.checkout-btn {
+.buy-btn {
   background-color: white;
   color: orange;
   padding: 10px;
@@ -77,7 +63,7 @@ footer {
   cursor: pointer;
   margin: 10px;
 }
-.checkout-btn:hover {
+.buy-btn:hover {
   background-color: orange;
   color: white;
   border: 1px solid white;
@@ -86,17 +72,35 @@ footer {
   cursor: pointer;
   margin: 10px;
 }
-.add-product-btn {
+.delete-product-btn {
   background-color: white;
-  color: #006241;
+  color: crimson;
   padding: 10px;
-  border: 1px solid #006241;
+  border: 1px solid crimson;
   border-radius: 5px;
   cursor: pointer;
   margin: 10px;
 }
-.add-product-btn:hover {
-  background-color: #006241;
+.delete-product-btn:hover {
+  background-color: crimson;
+  color: white;
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+.back-to-products-btn {
+  background-color: white;
+  color: violet;
+  padding: 10px;
+  border: 1px solid violet;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+.back-to-products-btn:hover {
+  background-color: violet;
   color: white;
   border: 1px solid white;
   padding: 10px;

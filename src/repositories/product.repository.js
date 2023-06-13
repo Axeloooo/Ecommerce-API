@@ -1,4 +1,4 @@
-import { productDao } from "../daos/product.dao.js";
+import productDao from "../daos/factories/product.factory.js";
 
 class ProductRepository {
   #productDao;

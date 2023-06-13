@@ -1,10 +1,4 @@
-<div>
-  <h1>{{name}}</h1>
-</div>
-
-<button type="button" onclick="logout()">Logout</button>
-
-{{#each products}}
+{{!-- {{#each products}}
   <div>
     <ul>
       <li>Title: {{product.title}}</li>
@@ -24,6 +18,30 @@
       </li>
     </ul>
   </div>
-{{/each}}
+{{/each}} --}}
 
-<script src="./js/index.js"></script>
+<header>
+  <div>
+    <h1>{{name}}</h1>
+  </div>
+  <div class="profile-container">
+    <h5>{{user}}</h5>
+    <button type="button" id="back-to-products-btn" class="back-to-products-btn">Back To Products</button>
+    <button type="button" id="buy-btn" class="buy-btn">Buy</button>
+    <button type="button" id="logout-btn" class="logout-btn">Logout</button>
+  </div>
+</header>
+<hr>
+<main>
+  <div>
+    <div id="product-container" class="products-container">
+      <h2>Products in Cart</h2>
+    </div>
+  </div>
+</main>
+<hr>
+<footer>
+  <p>Axel Sánchez &copy; 2023</p>
+</footer>
+
+<script src="/js/carts.js"></script>

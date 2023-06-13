@@ -1,6 +1,12 @@
 import { userRepository } from "../../repositories/user.repository.js";
 
-export async function postRegister(req, res) {
+import {
+  ClientError,
+  NotFoundError,
+  ServerError,
+} from "../../errors/errors.js";
+
+export async function postRegister(req, res, next) {
   try {
     res.status(200).json({
       statusCode: 200,
@@ -13,32 +19,16 @@ export async function postRegister(req, res) {
       },
     });
   } catch (error) {
-    res.status(500).json({
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: false,
-      body: { error: "Server Error" },
-    });
+    return next(new ServerError("Server Error"));
   }
 }
 
-export async function postLogin(req, res) {
+export async function postLogin(req, res, next) {
   try {
     const { email } = req.body;
     const user = await userRepository.getUserByEmail(email);
     if (!user) {
-      res.status(404).json({
-        statusCode: 404,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        success: false,
-        body: {
-          message: "Not Found",
-        },
-      });
+      return next(new NotFoundError("Not Found"));
     }
     req.session.user = {
       email: user.email,
@@ -57,31 +47,15 @@ export async function postLogin(req, res) {
       },
     });
   } catch (error) {
-    res.status(500).json({
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: false,
-      body: { error: "Server Error" },
-    });
+    return next(new ServerError("Server Error"));
   }
 }
 
-export async function postLogout(req, res) {
+export async function postLogout(req, res, next) {
   try {
     req.logout((error) => {
       if (error) {
-        res.status(400).json({
-          statusCode: 400,
-          headers: {
-            "Content-Type": "application/json",
-          },
-          success: false,
-          body: {
-            message: "Client Error",
-          },
-        });
+        return next(new ClientError("Client Error"));
       } else {
         res.status(200).json({
           statusCode: 200,
@@ -96,29 +70,15 @@ export async function postLogout(req, res) {
       }
     });
   } catch (error) {
-    res.status(500).json({
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: false,
-      body: { error: "Server Error" },
-    });
+    return next(new ServerError("Server Error"));
   }
 }
 
-export async function postGitHubLogin(req, res) {
+export async function postGitHubLogin(req, res, next) {
   try {
     req.session.user = req.user;
     res.status(200).redirect("/products");
   } catch (err) {
-    res.status(500).json({
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: false,
-      body: { error: "Server Error" },
-    });
+    return next(new ServerError("Server Error"));
   }
 }

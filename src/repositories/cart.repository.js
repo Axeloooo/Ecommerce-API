@@ -1,4 +1,4 @@
-import { cartDao } from "../daos/cart.dao.js";
+import cartDao from "../daos/factories/cart.factory.js";
 
 class CartRepository {
   #cartDao;

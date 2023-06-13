@@ -1,4 +1,4 @@
-import { userDao } from "../daos/user.dao.js";
+import userDao from "../daos/factories/user.factory.js";
 
 class UserRepository {
   #userDao;

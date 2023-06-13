@@ -1,4 +1,4 @@
-import { ticketDao } from "../daos/ticket.dao.js";
+import ticketDao from "../daos/factories/ticket.factory.js";
 
 class TicketRepository {
   #ticketDao;

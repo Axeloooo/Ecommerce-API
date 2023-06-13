@@ -1,20 +1,17 @@
 import { cartRepository } from "../../repositories/cart.repository.js";
 import { cartService } from "../../services/cart.service.js";
 
-export async function getCarts(req, res) {
+import {
+  ServerError,
+  NotFoundError,
+  ClientError,
+} from "../../errors/errors.js";
+
+export async function getCarts(req, res, next) {
   try {
     const carts = await cartRepository.getCarts();
     if (!carts) {
-      res.status(404).json({
-        statusCode: 404,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        success: false,
-        body: {
-          message: "Not Found",
-        },
-      });
+      return next(new NotFoundError("Not Found"));
     }
     res.status(200).json({
       statusCode: 200,
@@ -28,35 +25,16 @@ export async function getCarts(req, res) {
       },
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: false,
-      body: {
-        error: "Server Error",
-      },
-    });
+    return next(new ServerError("Server Error"));
   }
 }
 
-export async function getCartById(req, res) {
+export async function getCartById(req, res, next) {
   try {
     const cid = req.params.cid;
     const cart = await cartRepository.getCartById(cid);
     if (!cart) {
-      res.status(404).json({
-        statusCode: 404,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        success: false,
-        body: {
-          message: "Not Found",
-        },
-      });
+      return next(new NotFoundError("Not Found"));
     }
     res.status(200).json({
       statusCode: 200,
@@ -70,34 +48,15 @@ export async function getCartById(req, res) {
       },
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: false,
-      body: {
-        error: "Server Error",
-      },
-    });
+    return next(new ServerError("Server Error"));
   }
 }
 
-export async function postCart(req, res) {
+export async function postCart(req, res, next) {
   try {
     const cart = await cartRepository.postCart();
     if (!cart) {
-      res.status(400).json({
-        statusCode: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        success: false,
-        body: {
-          message: "Client Error",
-        },
-      });
+      return next(new ClientError("Client Error"));
     }
     res.status(201).json({
       statusCode: 201,
@@ -111,36 +70,17 @@ export async function postCart(req, res) {
       },
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: false,
-      body: {
-        error: "Server Error",
-      },
-    });
+    return next(new ServerError("Server Error"));
   }
 }
 
-export async function postProductInCartById(req, res) {
+export async function postProductInCartById(req, res, next) {
   try {
     const cid = req.params.cid;
     const pid = req.params.pid;
     const product = await cartRepository.postProductInCartById(cid, pid);
     if (!product) {
-      res.status(404).json({
-        statusCode: 404,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        success: false,
-        body: {
-          message: "Not Found",
-        },
-      });
+      return next(new NotFoundError("Not Found Error"));
     }
     res.status(201).json({
       statusCode: 201,
@@ -154,34 +94,15 @@ export async function postProductInCartById(req, res) {
       },
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: false,
-      body: {
-        error: "Server Error",
-      },
-    });
+    return next(new ServerError("Server Error"));
   }
 }
 
-export async function postPurchase(req, res) {
+export async function postPurchase(req, res, next) {
   try {
     const receipt = await cartService.postPurchase(req);
     if (!receipt) {
-      res.status(404).json({
-        statusCode: 404,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        success: false,
-        body: {
-          message: "Not Found",
-        },
-      });
+      return next(new NotFoundError("Not Found Error"));
     }
     res.status(201).json({
       statusCode: 201,
@@ -195,36 +116,17 @@ export async function postPurchase(req, res) {
       },
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: false,
-      body: {
-        error: "Server Error",
-      },
-    });
+    return next(new ServerError("Server Error"));
   }
 }
 
-export async function putCartById(req, res) {
+export async function putCartById(req, res, next) {
   try {
     const cid = req.params.cid;
     const data = req.body;
     const cart = await cartRepository.putCartById(cid, data);
     if (!cart) {
-      res.status(400).json({
-        statusCode: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        success: false,
-        body: {
-          message: "Client Error",
-        },
-      });
+      return next(new ClientError("Client Error"));
     }
     res.status(200).json({
       statusCode: 200,
@@ -238,37 +140,18 @@ export async function putCartById(req, res) {
       },
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: false,
-      body: {
-        error: "Server Error",
-      },
-    });
+    return next(new ServerError("Server Error"));
   }
 }
 
-export async function putProductInCartById(req, res) {
+export async function putProductInCartById(req, res, next) {
   try {
     const cid = req.params.cid;
     const pid = req.params.pid;
     const data = req.body;
     const product = await cartRepository.putProductInCartById(cid, pid, data);
     if (!product) {
-      res.status(404).json({
-        statusCode: 404,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        success: false,
-        body: {
-          message: "Not Found",
-        },
-      });
+      return next(new NotFoundError("Not Found Error"));
     }
     res.status(200).json({
       statusCode: 200,
@@ -282,35 +165,16 @@ export async function putProductInCartById(req, res) {
       },
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: false,
-      body: {
-        error: "Server Error",
-      },
-    });
+    return next(new ServerError("Server Error"));
   }
 }
 
-export async function deleteCartById(req, res) {
+export async function deleteCartById(req, res, next) {
   try {
     const cid = req.params.cid;
     const cart = await cartRepository.deleteCartById(cid);
     if (!cart) {
-      res.status(400).json({
-        statusCode: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        success: false,
-        body: {
-          message: "Client Error",
-        },
-      });
+      return next(new NotFoundError("Not Found Error"));
     }
     res.status(200).json({
       statusCode: 200,
@@ -324,36 +188,17 @@ export async function deleteCartById(req, res) {
       },
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: false,
-      body: {
-        error: "Server Error",
-      },
-    });
+    return next(new ServerError("Server Error"));
   }
 }
 
-export async function deleteProductInCartById(req, res) {
+export async function deleteProductInCartById(req, res, next) {
   try {
     const cid = req.params.cid;
     const pid = req.params.pid;
     const product = await cartRepository.deleteProductInCartById(cid, pid);
     if (!product) {
-      res.status(404).json({
-        status: 404,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        success: false,
-        body: {
-          message: "Not Found",
-        },
-      });
+      return next(new NotFoundError("Not Found Error"));
     }
     res.status(200).json({
       status: 200,
@@ -367,16 +212,6 @@ export async function deleteProductInCartById(req, res) {
       },
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: false,
-      body: {
-        error: "Server Error",
-      },
-    });
+    return next(new ServerError("Server Error"));
   }
 }
