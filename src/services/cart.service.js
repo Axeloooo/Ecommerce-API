@@ -31,10 +31,9 @@ class CartService {
         const newStock = product.product.stock - productQuantity;
 
         if (newStock >= 0) {
-          const updatedProduct = await productRepository.putProduct(
-            product.product._id,
-            { stock: newStock }
-          );
+          await productRepository.putProduct(product.product._id, {
+            stock: newStock,
+          });
 
           const productSoldFromCart =
             await cartRepository.deleteProductInCartById(

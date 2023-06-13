@@ -24,7 +24,7 @@ sessionsApiRouter.post(
 sessionsApiRouter.get(
   "/github",
   passport.authenticate("github", { scope: ["user:email"] }),
-  (req, res) => {}
+  () => {}
 );
 
 sessionsApiRouter.get(
