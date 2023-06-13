@@ -1,0 +1,24 @@
+[
+  {
+    "_id": 1,
+    "title": "Halo",
+    "code": "abcde",
+    "description": "Videogame",
+    "price": 100,
+    "status": false,
+    "stock": 2,
+    "category": "games",
+    "thumbnails": []
+  },
+  {
+    "_id": 2,
+    "title": "GTA V",
+    "code": "abcde",
+    "description": "Videogame",
+    "price": 100,
+    "status": false,
+    "stock": 2,
+    "category": "games",
+    "thumbnails": []
+  }
+]

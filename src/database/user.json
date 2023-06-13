@@ -1,0 +1,11 @@
+[
+  {
+    "_id": 1,
+    "first_name": "Axel",
+    "last_name": "Sanchez",
+    "email": "axel@mail.com",
+    "age": 20,
+    "password": "$2b$10$zVFNy.OyQAaLwTtSHKS4de9repeM231DLn9Qfz21QvrbyI5fY7dMS",
+    "role": "user"
+  }
+]
