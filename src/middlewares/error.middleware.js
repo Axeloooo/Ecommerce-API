@@ -1,6 +1,6 @@
 import { ServerError, NotFoundError, ClientError } from "../errors/errors.js";
 
-export function errorHandler(err, req, res) {
+export function errorHandler(err, req, res, next) {
   process.env.NODE_ENV === "DEV" ? console.error(err) : null;
 
   if (err instanceof ClientError) {

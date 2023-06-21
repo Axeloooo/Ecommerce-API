@@ -28,6 +28,7 @@ import { loginAuthRouter } from "../routes/auth/login.router.js";
 import session from "../middlewares/session.middleware.js";
 import { authenticate } from "../middlewares/authenticate.middleware.js";
 import { errorHandler } from "../middlewares/error.middleware.js";
+import { addLogger } from "../middlewares/logger.middleware.js";
 
 const app = express();
 
@@ -47,6 +48,9 @@ app.use(session);
 initializePassport();
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Logger middleware
+app.use(addLogger);
 
 // Auth routes
 app.use("/auth/register", registerAuthRouter);
@@ -91,6 +95,19 @@ app.get("/mockingproducts", (req, res, next) => {
     }
 
     res.json(products);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get("/loggerTest", (req, res, next) => {
+  try {
+    req.logger.info("Info");
+    req.logger.error("Error");
+    req.logger.warn("Warn");
+    req.logger.debug("Debug");
+    req.logger.http("Http");
+    res.send("Logger test");
   } catch (err) {
     next(err);
   }
