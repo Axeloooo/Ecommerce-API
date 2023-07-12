@@ -3,9 +3,6 @@ import express from "express";
 import handlebars from "express-handlebars";
 import passport from "passport";
 
-// Faker import
-import { faker } from "@faker-js/faker";
-
 // Config imports
 import { PORT } from "../config/server.config.js";
 import { connectDatabase } from "../database/mongodb.database.js";
@@ -19,6 +16,9 @@ import { sessionsApiRouter } from "../routes/api/sessions.router.js";
 // View imports
 import { cartsViewsRouter } from "../routes/web/carts.router.js";
 import { productsViewsRouter } from "../routes/web/products.router.js";
+import { mockingViewRouter } from "../routes/web/mocking.router.js";
+import { loggerViewRouter } from "../routes/web/logger.router.js";
+import { docsViewRouter } from "../routes/web/docs.router.js";
 
 // Auth imports
 import { registerAuthRouter } from "../routes/auth/register.router.js";
@@ -64,54 +64,9 @@ app.use("/api/sessions", sessionsApiRouter);
 // Web routes
 app.use("/carts", authenticate, cartsViewsRouter);
 app.use("/products", authenticate, productsViewsRouter);
-
-app.get("/", (req, res, next) => {
-  try {
-    let user = {
-      name: "Axel",
-    };
-    res.render("index", user);
-  } catch (err) {
-    next(err);
-  }
-});
-
-app.get("/mockingproducts", (req, res, next) => {
-  try {
-    let products = [];
-
-    for (let i = 0; i < 100; i++) {
-      products.push({
-        _id: faker.string.uuid(),
-        title: faker.commerce.productName(),
-        price: faker.commerce.price(),
-        description: faker.commerce.productDescription(),
-        code: faker.datatype.int(),
-        status: faker.datatype.boolean(),
-        stock: faker.datatype.int(),
-        category: faker.commerce.department(),
-        thumbnails: [faker.image.url()],
-      });
-    }
-
-    res.json(products);
-  } catch (err) {
-    next(err);
-  }
-});
-
-app.get("/loggerTest", (req, res, next) => {
-  try {
-    req.logger.info("Info");
-    req.logger.error("Error");
-    req.logger.warn("Warn");
-    req.logger.debug("Debug");
-    req.logger.http("Http");
-    res.send("Logger test");
-  } catch (err) {
-    next(err);
-  }
-});
+app.use("/mockingproducts", mockingViewRouter);
+app.use("/loggerTest", loggerViewRouter);
+app.use("/docs", docsViewRouter);
 
 // Errors middleware
 app.use(errorHandler);

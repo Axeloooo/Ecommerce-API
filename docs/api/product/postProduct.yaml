@@ -1,0 +1,104 @@
+paths:
+  /api/products:
+    post:
+      summary: Post new product
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: New product
+              properties:
+                title:
+                  type: string
+                  description: Title of the product
+                code:
+                  type: string
+                  description: Code of the product
+                description:
+                  type: string
+                  description: Description of the product
+                price:
+                  type: number
+                  description: Price of the product
+                status:
+                  type: boolean
+                  description: Status of the product
+                stock:
+                  type: number
+                  description: Stock of the product
+                category:
+                  type: string
+                  description: Category of the product
+                thumbnails:
+                  type: array
+                  description: Array with the thumbnails
+                  items:
+                    type: string
+                    description: Image URL
+              example: {
+                "title": "Halo 3",
+                "code": "abcde",
+                "description": "Videogame",
+                "price": 100,
+                "status": false,
+                "stock": 1000,
+                "category": "games",
+                "thumbnails": [
+                  Halo3.png
+                ]
+              }
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: Auto-generated ID of the product
+                  title:
+                    type: string
+                    description: Title of the product
+                  code:
+                    type: string
+                    description: Code of the product
+                  description:
+                    type: string
+                    description: Description of the product
+                  price:
+                    type: number
+                    description: Price of the product
+                  status:
+                    type: boolean
+                    description: Status of the product
+                  stock:
+                    type: number
+                    description: Stock of the product
+                  category:
+                    type: string
+                    description: Category of the product
+                  thumbnails:
+                    type: array
+                    description: Array with the thumbnails
+                    items:
+                      type: string
+                      description: Image URL
+                example: {
+                  "_id": "1",
+                  "title": "Halo 3",
+                  "code": "abcde",
+                  "description": "Videogame",
+                  "price": 100,
+                  "status": false,
+                  "stock": 1000,
+                  "category": "games",
+                  "thumbnails": [
+                    Halo3.png
+                  ]
+                }

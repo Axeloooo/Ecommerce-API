@@ -1,0 +1,58 @@
+paths: 
+  /api/carts/{cid}/products/{pid}:
+    post:
+      summary: Post new product in cart by ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart ID
+          schema:
+            type : string
+            example: 1
+        - name: pid
+          in: path
+          required: true
+          description: Product ID
+          schema:
+            type : string
+            example: 1
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: Auto-generated ID of the cart
+                    example: 1
+                  products:
+                    type: array
+                    description: Array with the stored products
+                    items:
+                      type: object
+                      properties:
+                        product:
+                          type: string
+                          description: Auto-generated ID of the product
+                        quantity:
+                          type: number
+                          description: Quantity of the product
+                example: {
+                  "_id": "1",
+                  "products": [
+                    {
+                      "product": "1",
+                      "quantity": 836
+                    },
+                    {
+                      "product": "2",
+                      "quantity": 342 
+                    }
+                  ]
+                }

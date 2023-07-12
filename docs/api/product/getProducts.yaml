@@ -1,0 +1,97 @@
+paths:
+  /api/products:
+    get:
+      summary: Get products
+      tags:
+        - Products
+      parameters:
+        - in: query
+          name: page
+          description: Page index of the pagination
+          schema:
+            type: number
+          example: GET /api/products?page=1
+        - in: query
+          name: sort
+          description: Sort by scending or descending order
+          schema:
+            type: string
+          example: GET /api/products?sort=asc
+        - in: query
+          name: lim
+          description: Limit the amount of products
+          schema:
+            type: number
+          example: GET /api/products?lim=2
+        - in: query
+          name: query
+          description: Query search for the products
+          schema:
+            type: string
+          example: GET /api/products?query=stock:23
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: Auto-generated ID of the product
+                  title:
+                    type: string
+                    description: Title of the product
+                  code:
+                    type: string
+                    description: Code of the product
+                  description:
+                    type: string
+                    description: Description of the product
+                  price:
+                    type: number
+                    description: Price of the product
+                  status:
+                    type: boolean
+                    description: Status of the product
+                  stock:
+                    type: number
+                    description: Stock of the product
+                  category:
+                    type: string
+                    description: Category of the product
+                  thumbnails:
+                    type: array
+                    description: Array with the thumbnails
+                    items:
+                      type: string
+                      description: Image URL
+                example: [
+                  {
+                    "_id": "1",
+                    "title": "Halo 3",
+                    "code": "abcde",
+                    "description": "Videogame",
+                    "price": 100,
+                    "status": false,
+                    "stock": 2,
+                    "category": "games",
+                    "thumbnails": [
+                      Halo3.png
+                    ]
+                  },
+                  {
+                    "_id": "2",
+                    "title": "GTA V",
+                    "code": "abcde",
+                    "description": "Videogame",
+                    "price": 200,
+                    "status": false,
+                    "stock": 42,
+                    "category": "games",
+                    "thumbnails": [
+                      GTAV.png
+                    ]
+                  }
+                ]

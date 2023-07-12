@@ -1,0 +1,40 @@
+paths:
+  /api/carts/{cid}/products/{pid}:
+    delete:
+      summary: Delete product in cart by ID
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Cart ID
+          schema:
+            type : string
+            example: 1
+        - name: pid
+          in: path
+          required: true
+          description: Product ID
+          schema:
+            type : string
+            example: 1
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product:
+                    type: string
+                    description: Auto-generated ID of the product
+                  quantity:
+                    type: number
+                    description: Quantity of the product
+                example: {
+                  "product": "1",
+                  "quantity": 836
+                }
+                
