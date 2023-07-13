@@ -105,6 +105,6 @@ const productSchema = new Schema(
 );
 
 productSchema.plugin(mongoosePaginate);
-const productModel = model(productsCollection, productSchema);
+export const productModel = model(productsCollection, productSchema);
 
-export const productDao = new ProductDao(productModel);
+export const mongoProductDao = new ProductDao(productModel);

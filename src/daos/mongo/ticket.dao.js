@@ -59,4 +59,4 @@ const ticketSchema = new Schema(
 
 const ticketModel = model(ticketsCollection, ticketSchema);
 
-export const ticketDao = new TicketDao(ticketModel);
+export const mongoTicketDao = new TicketDao(ticketModel);

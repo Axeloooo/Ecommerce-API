@@ -30,7 +30,11 @@ import { authenticate } from "../middlewares/authenticate.middleware.js";
 import { errorHandler } from "../middlewares/error.middleware.js";
 import { addLogger } from "../middlewares/logger.middleware.js";
 
-const app = express();
+import dotenv from "dotenv";
+
+dotenv.config();
+
+export const app = express();
 
 await connectDatabase();
 
@@ -57,8 +61,12 @@ app.use("/auth/register", registerAuthRouter);
 app.use("/auth/login", loginAuthRouter);
 
 // Api routes
-app.use("/api/carts", authenticate, cartsApiRouter);
-app.use("/api/products", authenticate, productsApiRouter);
+process.env.NODE_ENV === "TEST"
+  ? app.use("/api/carts", cartsApiRouter)
+  : app.use("/api/carts", authenticate, cartsApiRouter);
+process.env.NODE_ENV === "TEST"
+  ? app.use("/api/products", productsApiRouter)
+  : app.use("/api/products", authenticate, productsApiRouter);
 app.use("/api/sessions", sessionsApiRouter);
 
 // Web routes
@@ -70,7 +78,6 @@ app.use("/docs", docsViewRouter);
 
 // Errors middleware
 app.use(errorHandler);
-
-app.listen(PORT, () => {
+export const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}!`);
 });
