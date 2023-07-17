@@ -28,7 +28,7 @@ export async function getProducts(req, res, next) {
     }
     res.status(200).json({ body: products });
   } catch (error) {
-    return next(new ServerError("Server Error"));
+    return next(error);
   }
 }
 
@@ -46,7 +46,7 @@ export async function getProductById(req, res, next) {
     }
     res.status(200).json({ body: product });
   } catch (error) {
-    return next(new ServerError("Server Error"));
+    return next(error);
   }
 }
 
@@ -64,7 +64,7 @@ export async function postProduct(req, res, next) {
     }
     res.status(201).json({ body: newProduct });
   } catch (error) {
-    return next(new ServerError("Server Error"));
+    return next(error);
   }
 }
 
@@ -83,7 +83,7 @@ export async function putProduct(req, res, next) {
     }
     res.status(200).json({ body: updatedProduct });
   } catch (error) {
-    return next(new ServerError("Server Error"));
+    return next(error);
   }
 }
 
@@ -101,6 +101,6 @@ export async function deleteProductById(req, res, next) {
     }
     res.status(200).json({ body: deletedProduct });
   } catch (error) {
-    return next(new ServerError("Server Error"));
+    return next(error);
   }
 }

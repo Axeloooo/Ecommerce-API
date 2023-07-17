@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
+import { ServerError } from "../../errors/errors.js";
 
 class ProductDao {
   #productModel;
@@ -30,7 +31,7 @@ class ProductDao {
       );
       return res;
     } catch (err) {
-      throw new Error(err);
+      throw new ServerError(err.message);
     }
   }
 
@@ -39,7 +40,7 @@ class ProductDao {
       const res = await productModel.findById(pid).lean();
       return res;
     } catch (err) {
-      throw new Error(err);
+      throw new ServerError(err.message);
     }
   }
 
@@ -57,16 +58,18 @@ class ProductDao {
       });
       return res;
     } catch (err) {
-      throw new Error(err);
+      throw new ServerError(err.message);
     }
   }
 
   async putProduct(pid, data) {
     try {
-      const res = await productModel.findByIdAndUpdate(pid, data).lean();
+      const res = await productModel
+        .findByIdAndUpdate(pid, data, { new: true })
+        .lean();
       return res;
     } catch (err) {
-      throw new Error(err);
+      throw new ServerError(err.message);
     }
   }
 
@@ -75,7 +78,7 @@ class ProductDao {
       const res = productModel.findByIdAndDelete(pid).lean();
       return res;
     } catch (err) {
-      throw new Error(err);
+      throw new ServerError(err.message);
     }
   }
 }

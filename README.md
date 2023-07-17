@@ -2,6 +2,4 @@
 
 # Ecommerce API
 
-## TO DO
-
-- Add cart in user model, so that i can reference a cart ID to a user
+## Overview
