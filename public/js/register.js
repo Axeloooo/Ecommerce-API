@@ -1,7 +1,3 @@
-import dotenv from "dotenv";
-
-dotenv.config();
-
 const registerForm = document.getElementById("register-form");
 
 registerForm.addEventListener("submit", async (event) => {
