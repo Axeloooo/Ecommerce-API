@@ -5,7 +5,7 @@
   "main": "./src/server.js",
   "type": "module",
   "scripts": {
-    "start": "node .",
+    "start": "NODE_ENV=PROD node .",
     "lint": "eslint .",
     "test": "NODE_ENV=TEST mocha",
     "dev": "NODE_ENV=PROD nodemon -e 'js' ."
