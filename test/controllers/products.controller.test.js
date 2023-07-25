@@ -1,13 +1,7 @@
-import supertest from "supertest";
-import { beforeEach, after } from "mocha";
+import { beforeEach } from "mocha";
 import { assert } from "chai";
 
-import mongoose from "mongoose";
-
-import { app, server } from "../../src/app/app.js";
-import { productModel } from "../../src/daos/mongo/product.dao.js";
-
-const http = supertest.agent(app);
+import { endOfProductTest, endOfUserTest, http } from "../config.test.js";
 
 const newProduct = {
   title: "GTA V",
@@ -35,7 +29,7 @@ const updatedProduct = {
 
 describe("Products Controller", () => {
   beforeEach(async () => {
-    await productModel.deleteMany({});
+    await endOfProductTest();
   });
 
   describe("POST /api/products", () => {
@@ -65,6 +59,7 @@ describe("Products Controller", () => {
         "Response should contain one product"
       );
     });
+
     it("should return a list with just one product", async () => {
       const _ = await http.post("/api/products").send(newProduct);
       const response = await http.get("/api/products?lim=1");
@@ -137,9 +132,4 @@ describe("Products Controller", () => {
       assert.equal(response.status, 500, "Status should be 500");
     });
   });
-});
-
-after(async () => {
-  await mongoose.connection.close();
-  server.close();
 });
