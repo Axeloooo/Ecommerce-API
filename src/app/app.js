@@ -2,6 +2,7 @@
 import express from "express";
 import handlebars from "express-handlebars";
 import passport from "passport";
+import cors from "cors";
 
 // Config imports
 import { PORT } from "../config/server.config.js";
@@ -46,6 +47,7 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
+app.use(cors());
 
 // Passport middleware
 app.use(session);

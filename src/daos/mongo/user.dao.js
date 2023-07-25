@@ -75,6 +75,6 @@ const userSchema = new Schema(
   }
 );
 
-const userModel = model(usersCollection, userSchema);
+export const userModel = model(usersCollection, userSchema);
 
 export const mongoUserDao = new UserDao(userModel);
