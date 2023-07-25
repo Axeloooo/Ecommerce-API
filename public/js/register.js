@@ -1,4 +1,4 @@
-const DOMAIN = "window.location.origin";
+const DOMAIN = window.location.origin;
 
 const registerForm = document.getElementById("register-form");
 
