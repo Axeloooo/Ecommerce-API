@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const registerForm = document.getElementById("register-form");
 
 registerForm.addEventListener("submit", async (event) => {
@@ -10,7 +14,7 @@ registerForm.addEventListener("submit", async (event) => {
   const password = formData.get("password");
 
   const fetchRegister = await fetch(
-    "http://localhost:8080/api/sessions/register",
+    `${process.env.DOMAIN}/api/sessions/register`,
     {
       method: "POST",
       headers: {
@@ -28,7 +32,7 @@ registerForm.addEventListener("submit", async (event) => {
   const registeredUser = await fetchRegister.json();
 
   if (registeredUser.success) {
-    const fetchNewCart = await fetch("http://localhost:8080/api/carts", {
+    const fetchNewCart = await fetch(`${process.env.DOMAIN}/api/carts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
