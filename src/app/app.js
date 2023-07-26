@@ -58,6 +58,10 @@ app.use(passport.session());
 // Logger middleware
 app.use(addLogger);
 
+app.get("/", (req, res) => {
+  res.redirect("/products");
+});
+
 // Auth routes
 app.use("/auth/register", registerAuthRouter);
 app.use("/auth/login", loginAuthRouter);

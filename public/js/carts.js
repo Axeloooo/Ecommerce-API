@@ -13,7 +13,7 @@ window.window.addEventListener("DOMContentLoaded", async function () {
 
 logoutBtn.addEventListener("click", async function (event) {
   event.preventDefault();
-  const res = await fetch("http://localhost:8080/api/sessions/logout");
+  const res = await fetch("/api/sessions/logout");
   const data = await res.json();
   if (!data.success) {
     console.error("Logout failed");
@@ -26,7 +26,7 @@ logoutBtn.addEventListener("click", async function (event) {
 buyBtn.addEventListener("click", async function (event) {
   event.preventDefault();
   const cartId = localStorage.getItem("cartId");
-  const res = fetch(`http://localhost:8080/api/carts/${cartId}/purchase`, {
+  const res = fetch(`/api/carts/${cartId}/purchase`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -49,7 +49,7 @@ backToProductsBtn.addEventListener("click", async function (event) {
 async function handleDeleteProduct(product) {
   const cartId = localStorage.getItem("cartId");
   const res = await fetch(
-    `http://localhost:8080/api/carts/${cartId}/products/${product.product._id}`,
+    `/api/carts/${cartId}/products/${product.product._id}`,
     {
       method: "DELETE",
       headers: {
@@ -66,7 +66,7 @@ async function handleDeleteProduct(product) {
 
 async function fetchCart() {
   const cartId = localStorage.getItem("cartId");
-  const res = await fetch(`http://localhost:8080/api/carts/${cartId}`, {
+  const res = await fetch(`/api/carts/${cartId}`, {
     headers: {
       "Content-Type": "application/json",
     },

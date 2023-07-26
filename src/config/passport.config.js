@@ -63,7 +63,7 @@ export function initializePassport() {
       {
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: "http://localhost:8080/api/sessions/githubcallback",
+        callbackURL: "/api/sessions/githubcallback",
       },
       async (accessToken, refreshToken, profile, done) => {
         try {

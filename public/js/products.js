@@ -14,7 +14,7 @@ window.window.addEventListener("DOMContentLoaded", async function () {
 
 logoutBtn.addEventListener("click", async function (event) {
   event.preventDefault();
-  const res = await fetch("http://localhost:8080/api/sessions/logout");
+  const res = await fetch("/api/sessions/logout");
   const data = await res.json();
   if (!data.success) {
     console.error("Logout failed");
@@ -34,13 +34,10 @@ checkoutBtn.addEventListener("click", async function (event) {
 
 async function handleAddProduct(product) {
   const cartId = localStorage.getItem("cartId");
-  const res = await fetch(
-    `http://localhost:8080/api/carts/${cartId}/product/${product.id}`,
-    {
-      method: "POST",
-      "Content-Type": "application/json",
-    }
-  );
+  const res = await fetch(`/api/carts/${cartId}/product/${product.id}`, {
+    method: "POST",
+    "Content-Type": "application/json",
+  });
   if (!res.ok) {
     console.error("Error adding product to cart");
     return;
@@ -50,7 +47,7 @@ async function handleAddProduct(product) {
 // Functions
 
 async function fetchProducts() {
-  const res = await fetch("http://localhost:8080/api/products");
+  const res = await fetch("/api/products");
   const data = await res.json();
   return data.body;
 }
@@ -117,8 +114,8 @@ function setPagination(paginationInfo) {
 function setPaging(pagingInfo) {
   const pagingContainer = document.getElementById("paging-container");
   pagingContainer.innerHTML = `
-    <a href="http://localhost:8080/products/?lim=${pagingInfo.limit}&page=${pagingInfo.prevPage}">Prev</a>
+    <a href="/products/?lim=${pagingInfo.limit}&page=${pagingInfo.prevPage}">Prev</a>
     <p>${pagingInfo.page}</p>
-    <a href="http://localhost:8080/products/?lim=${pagingInfo.limit}&page=${pagingInfo.nextPage}">Next</a>
+    <a href="/products/?lim=${pagingInfo.limit}&page=${pagingInfo.nextPage}">Next</a>
   `;
 }
