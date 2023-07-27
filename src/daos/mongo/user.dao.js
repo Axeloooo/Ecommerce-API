@@ -26,10 +26,10 @@ class UserDao {
     }
   }
 
-  async getUserById(id) {
+  async getUserById(id, context = "controller") {
     try {
       const res = await this.#userModel.findById(id);
-      if (!res) {
+      if (!res && context === "controller") {
         throw new UserNotFoundError(`User with ID ${id} not found.`);
       }
       return res;
@@ -59,12 +59,12 @@ class UserDao {
     }
   }
 
-  async getUserByEmail(email) {
+  async getUserByEmail(email, context = "controller") {
     try {
       const res = await this.#userModel.findOne({
         email: email,
       });
-      if (!res) {
+      if (!res && context === "controller") {
         throw new UserNotFoundError(`User with email ${email} not found.`);
       }
       return res;

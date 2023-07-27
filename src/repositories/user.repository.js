@@ -11,16 +11,16 @@ class UserRepository {
     return await userDao.getAllUsers();
   }
 
-  async getUserById(id) {
-    return userDao.getUserById(id);
+  async getUserById(id, context = "controller") {
+    return userDao.getUserById(id, context);
   }
 
   async postUser(user) {
     return userDao.postUser(user);
   }
 
-  async getUserByEmail(email) {
-    return userDao.getUserByEmail(email);
+  async getUserByEmail(email, context = "controller") {
+    return userDao.getUserByEmail(email, context);
   }
 }
 

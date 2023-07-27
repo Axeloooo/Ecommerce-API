@@ -18,7 +18,8 @@ export function initializePassport() {
       async (req, _u, _p, done) => {
         try {
           const { firstName, lastName, email, age, password, role } = req.body;
-          const user = await userRepository.getUserByEmail(email);
+          const context = "passport";
+          const user = await userRepository.getUserByEmail(email, context);
           if (user) {
             return done(null, false);
           }
@@ -43,7 +44,8 @@ export function initializePassport() {
     "login",
     new localStrategy({ usernameField: "email" }, async (_u, _p, done) => {
       try {
-        const user = await userRepository.getUserByEmail(_u);
+        const context = "passport";
+        const user = await userRepository.getUserByEmail(_u, context);
         if (!user) {
           return done(null, false);
         }
@@ -94,7 +96,8 @@ export function initializePassport() {
   });
 
   passport.deserializeUser(async (id, done) => {
-    const user = await userRepository.getUserById(id);
+    const context = "passport";
+    const user = await userRepository.getUserById(id, context);
     done(null, user);
   });
 }
