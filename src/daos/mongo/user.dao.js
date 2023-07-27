@@ -1,5 +1,11 @@
 import { Schema, model } from "mongoose";
 
+import {
+  UserNotFoundError,
+  UsersNotFoundError,
+  ValidationError,
+} from "../../errors/errors.js";
+
 class UserDao {
   #userModel;
 
@@ -7,18 +13,35 @@ class UserDao {
     this.#userModel = userModel;
   }
 
-  async getUserById(id) {
+  async getAllUsers() {
     try {
-      const res = await userModel.findById(id);
+      const res = await this.#userModel.find({});
+      if (!res) {
+        throw new UsersNotFoundError("Users not found");
+      }
       return res;
     } catch (err) {
-      throw new Error(err);
+      console.error("Error in getAllUsers:", err);
+      throw err;
+    }
+  }
+
+  async getUserById(id) {
+    try {
+      const res = await this.#userModel.findById(id);
+      if (!res) {
+        throw new UserNotFoundError(`User with ID ${id} not found.`);
+      }
+      return res;
+    } catch (err) {
+      console.error("Error in getUserById:", err);
+      throw err;
     }
   }
 
   async postUser(user) {
     try {
-      const res = await userModel.create({
+      const res = await this.#userModel.create({
         first_name: user.firstName,
         last_name: user.lastName,
         email: user.email,
@@ -28,18 +51,26 @@ class UserDao {
       });
       return res;
     } catch (err) {
-      throw new Error(err);
+      if (err.name === "ValidationError") {
+        throw new ValidationError("Invalid user data.");
+      }
+      console.error("Error in postUser:", err);
+      throw err;
     }
   }
 
   async getUserByEmail(email) {
     try {
-      const res = await userModel.findOne({
+      const res = await this.#userModel.findOne({
         email: email,
       });
+      if (!res) {
+        throw new UserNotFoundError(`User with email ${email} not found.`);
+      }
       return res;
     } catch (err) {
-      throw new Error(err);
+      console.error("Error in getUserByEmail:", err);
+      throw err;
     }
   }
 }

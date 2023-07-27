@@ -13,6 +13,7 @@ import { initializePassport } from "../config/passport.config.js";
 import { cartsApiRouter } from "../routes/api/carts.router.js";
 import { productsApiRouter } from "../routes/api/products.router.js";
 import { sessionsApiRouter } from "../routes/api/sessions.router.js";
+import { usersApiRouter } from "../routes/api/users.router.js";
 
 // View imports
 import { cartsViewsRouter } from "../routes/web/carts.router.js";
@@ -58,28 +59,40 @@ app.use(passport.session());
 // Logger middleware
 app.use(addLogger);
 
+// Redirect to products
 app.get("/", (req, res) => {
   res.redirect("/products");
 });
 
 // Auth routes
 app.use("/auth/register", registerAuthRouter);
+
 app.use("/auth/login", loginAuthRouter);
 
 // Api routes
 process.env.NODE_ENV === "TEST"
   ? app.use("/api/carts", cartsApiRouter)
   : app.use("/api/carts", authenticate, cartsApiRouter);
+
 process.env.NODE_ENV === "TEST"
   ? app.use("/api/products", productsApiRouter)
   : app.use("/api/products", authenticate, productsApiRouter);
+
+process.env.NODE_ENV === "TEST"
+  ? app.use("/api/users", usersApiRouter)
+  : app.use("/api/users", authenticate, usersApiRouter);
+
 app.use("/api/sessions", sessionsApiRouter);
 
 // Web routes
 app.use("/carts", authenticate, cartsViewsRouter);
+
 app.use("/products", authenticate, productsViewsRouter);
+
 app.use("/mockingproducts", mockingViewRouter);
+
 app.use("/loggerTest", loggerViewRouter);
+
 app.use("/docs", docsViewRouter);
 
 // Errors middleware

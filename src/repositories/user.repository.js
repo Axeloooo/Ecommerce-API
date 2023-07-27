@@ -7,28 +7,20 @@ class UserRepository {
     this.#userDao = userDao;
   }
 
+  async getAllUsers() {
+    return await userDao.getAllUsers();
+  }
+
   async getUserById(id) {
-    try {
-      return userDao.getUserById(id);
-    } catch (err) {
-      throw new Error(err);
-    }
+    return userDao.getUserById(id);
   }
 
   async postUser(user) {
-    try {
-      return userDao.postUser(user);
-    } catch (err) {
-      throw new Error(err);
-    }
+    return userDao.postUser(user);
   }
 
   async getUserByEmail(email) {
-    try {
-      return userDao.getUserByEmail(email);
-    } catch (err) {
-      throw new Error(err);
-    }
+    return userDao.getUserByEmail(email);
   }
 }
 
