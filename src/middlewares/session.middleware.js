@@ -9,8 +9,8 @@ export default session({
   cookie: {
     maxAge:
       process.env.NODE_ENV === "TEST" ? 60 * 10000 : 1000 * 60 * 60 * 24 * 7,
-    sameSite: process.env.NODE_ENV === "TEST" ? "lax" : "none",
-    secure: process.env.NODE_ENV === "TEST" ? false : true,
+    sameSite: "none",
+    secure: true,
   },
   secret: "SESSION_SECRET",
 });
