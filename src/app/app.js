@@ -8,6 +8,7 @@ import cors from "cors";
 import { PORT } from "../config/server.config.js";
 import { connectDatabase } from "../database/mongodb.database.js";
 import { initializePassport } from "../config/passport.config.js";
+import { CORS } from "../config/cors.config.js";
 
 // Api imports
 import { cartsApiRouter } from "../routes/api/carts.router.js";
@@ -45,7 +46,7 @@ app.engine("handlebars", handlebars.engine());
 app.set("views", "./views");
 app.set("view engine", "handlebars");
 
-app.use(cors());
+process.env.NODE_ENV === "TEST" ? app.use(cors()) : app.use(cors(CORS));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
