@@ -8,7 +8,6 @@ export default session({
   resave: false,
   cookie: {
     secure: true,
-    sameSite: "none",
     maxAge:
       process.env.NODE_ENV === "TEST" ? 60 * 10000 : 1000 * 60 * 60 * 24 * 7,
   },
