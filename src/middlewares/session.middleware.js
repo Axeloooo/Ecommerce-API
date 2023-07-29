@@ -7,8 +7,8 @@ export default session({
   saveUninitialized: false,
   resave: false,
   cookie: {
-    secure: true,
-    sameSite: "none",
+    secure: process.env.NODE_ENV === "PRODUCTION" ? true : false,
+    sameSite: process.env.NODE_ENV === "PRODUCTION" ? "none" : "lax",
     maxAge:
       process.env.NODE_ENV === "TEST" ? 60 * 10000 : 1000 * 60 * 60 * 24 * 7,
   },
