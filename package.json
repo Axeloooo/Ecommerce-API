@@ -8,7 +8,7 @@
     "start": "NODE_ENV=PROD node .",
     "lint": "eslint .",
     "test": "NODE_ENV=TEST mocha",
-    "dev": "NODE_ENV=PROD nodemon -e 'js' ."
+    "dev": "NODE_ENV=DEV nodemon -e 'js' ."
   },
   "repository": {
     "type": "git",
