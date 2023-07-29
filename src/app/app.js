@@ -45,6 +45,7 @@ app.engine("handlebars", handlebars.engine());
 
 app.set("views", "./views");
 app.set("view engine", "handlebars");
+app.set("trust proxy", 1);
 
 process.env.NODE_ENV === "TEST" ? app.use(cors()) : app.use(cors(CORS));
 
