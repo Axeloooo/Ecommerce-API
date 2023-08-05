@@ -26,7 +26,7 @@ export async function getProducts(req, res, next) {
     if (!products) {
       return next(new NotFoundError("Not Found"));
     }
-    res.status(200).json({ body: products });
+    res.status(200).json(products);
   } catch (error) {
     return next(error);
   }
@@ -44,7 +44,7 @@ export async function getProductById(req, res, next) {
     if (!product) {
       return next(new NotFoundError("Not Found"));
     }
-    res.status(200).json({ body: product });
+    res.status(200).json(product);
   } catch (error) {
     return next(error);
   }

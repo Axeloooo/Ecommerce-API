@@ -5,14 +5,16 @@ export class User {
   #age;
   #password;
   #role;
+  #cid;
 
-  constructor(firstName, lastName, email, age, password, role) {
+  constructor(firstName, lastName, email, age, password, role, cid) {
     this.#firstName = firstName;
     this.#lastName = lastName;
     this.#email = email;
     this.#age = age;
     this.#password = password;
     this.#role = role;
+    this.#cid = cid;
   }
 
   get firstName() {
@@ -61,5 +63,13 @@ export class User {
 
   set role(role) {
     this.#role = role;
+  }
+
+  get cid() {
+    return this.#cid;
+  }
+
+  set cid(cid) {
+    this.#cid = cid;
   }
 }

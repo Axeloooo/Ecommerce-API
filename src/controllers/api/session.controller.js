@@ -8,16 +8,8 @@ import {
 
 export async function postRegister(req, res, next) {
   try {
-    res.status(200).json({
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: true,
-      body: {
-        message: "Ok",
-      },
-    });
+    const { cid } = req.body;
+    res.status(200).json(cid);
   } catch (error) {
     return next(new ServerError("Server Error"));
   }
@@ -36,16 +28,7 @@ export async function postLogin(req, res, next) {
       last_name: user.last_name,
       age: user.age,
     };
-    res.status(200).json({
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: true,
-      body: {
-        message: "Ok",
-      },
-    });
+    res.status(200).json(user.cid);
   } catch (error) {
     return next(new ServerError("Server Error"));
   }

@@ -94,6 +94,15 @@ class CartDao {
     }
   }
 
+  async deleteFullCartById(cid) {
+    try {
+      const cart = await this.#cartModel.findByIdAndDelete(cid).lean();
+      return cart;
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
   async deleteProductInCartById(cid, pid) {
     try {
       let cart = await this.#cartModel.findById(cid);

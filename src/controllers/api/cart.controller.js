@@ -13,17 +13,7 @@ export async function getCarts(req, res, next) {
     if (!carts) {
       return next(new NotFoundError("Not Found"));
     }
-    res.status(200).json({
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: true,
-      body: {
-        message: "Ok",
-        carts: carts,
-      },
-    });
+    res.status(200).json(carts);
   } catch (err) {
     return next(new ServerError("Server Error"));
   }
@@ -36,17 +26,7 @@ export async function getCartById(req, res, next) {
     if (!cart) {
       return next(new NotFoundError("Not Found"));
     }
-    res.status(200).json({
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: true,
-      body: {
-        message: "Ok",
-        cart: cart,
-      },
-    });
+    res.status(200).json(cart);
   } catch (err) {
     return next(new ServerError("Server Error"));
   }
@@ -58,17 +38,7 @@ export async function postCart(req, res, next) {
     if (!cart) {
       return next(new ClientError("Client Error"));
     }
-    res.status(201).json({
-      statusCode: 201,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: true,
-      body: {
-        message: "Created",
-        cart: cart,
-      },
-    });
+    res.status(201).json(cart);
   } catch (err) {
     return next(new ServerError("Server Error"));
   }
@@ -82,17 +52,7 @@ export async function postProductInCartById(req, res, next) {
     if (!product) {
       return next(new NotFoundError("Not Found Error"));
     }
-    res.status(201).json({
-      statusCode: 201,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: true,
-      body: {
-        message: "Created",
-        product: product,
-      },
-    });
+    res.status(201).json(product);
   } catch (err) {
     return next(new ServerError("Server Error"));
   }
@@ -104,17 +64,7 @@ export async function postPurchase(req, res, next) {
     if (!receipt) {
       return next(new NotFoundError("Not Found Error"));
     }
-    res.status(201).json({
-      statusCode: 201,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: true,
-      body: {
-        message: "Ok",
-        receipt: receipt,
-      },
-    });
+    res.status(201).json(receipt);
   } catch (err) {
     return next(new ServerError("Server Error"));
   }
@@ -128,17 +78,7 @@ export async function putCartById(req, res, next) {
     if (!cart) {
       return next(new ClientError("Client Error"));
     }
-    res.status(200).json({
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: true,
-      body: {
-        message: "Ok",
-        product: cart,
-      },
-    });
+    res.status(200).json(cart);
   } catch (err) {
     return next(new ServerError("Server Error"));
   }
@@ -153,17 +93,7 @@ export async function putProductInCartById(req, res, next) {
     if (!product) {
       return next(new NotFoundError("Not Found Error"));
     }
-    res.status(200).json({
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: true,
-      body: {
-        message: "Ok",
-        product: product,
-      },
-    });
+    res.status(200).json(product);
   } catch (err) {
     return next(new ServerError("Server Error"));
   }
@@ -176,17 +106,7 @@ export async function deleteCartById(req, res, next) {
     if (!cart) {
       return next(new NotFoundError("Not Found Error"));
     }
-    res.status(200).json({
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: true,
-      body: {
-        message: "Ok",
-        cart: cart,
-      },
-    });
+    res.status(200).json(cart);
   } catch (err) {
     return next(new ServerError("Server Error"));
   }
@@ -200,17 +120,7 @@ export async function deleteProductInCartById(req, res, next) {
     if (!product) {
       return next(new NotFoundError("Not Found Error"));
     }
-    res.status(200).json({
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      success: true,
-      body: {
-        message: "Ok",
-        product: product,
-      },
-    });
+    res.status(200).json(product);
   } catch (err) {
     return next(new ServerError("Server Error"));
   }

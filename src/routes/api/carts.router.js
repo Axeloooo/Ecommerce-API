@@ -15,11 +15,11 @@ cartsApiRouter.post("/:cid/purchase", cartController.postPurchase);
 
 cartsApiRouter.put("/:cid", cartController.putCartById);
 
-cartsApiRouter.put("/:cid/products/:pid", cartController.putProductInCartById);
+cartsApiRouter.put("/:cid/product/:pid", cartController.putProductInCartById);
 
 cartsApiRouter.delete("/:cid", cartController.deleteCartById);
 
 cartsApiRouter.delete(
-  "/:cid/products/:pid",
+  "/:cid/product/:pid",
   cartController.deleteProductInCartById
 );

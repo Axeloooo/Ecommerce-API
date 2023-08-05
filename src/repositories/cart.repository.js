@@ -63,6 +63,14 @@ class CartRepository {
     }
   }
 
+  async deleteFullCartById(cid) {
+    try {
+      return cartDao.deleteFullCartById(cid);
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
   async deleteProductInCartById(cid, pid) {
     try {
       return cartDao.deleteProductInCartById(cid, pid);

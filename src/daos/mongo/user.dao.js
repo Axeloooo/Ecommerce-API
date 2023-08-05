@@ -48,6 +48,7 @@ class UserDao {
         age: user.age,
         password: user.password,
         role: user.role,
+        cid: user.cid,
       });
       return res;
     } catch (err) {
@@ -99,6 +100,10 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
+    },
+    cid: {
+      type: String,
+      required: true,
     },
   },
   {

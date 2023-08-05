@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import { createHash, isValidPassword } from "../utils/encrypt.util.js";
 import { userRepository } from "../repositories/user.repository.js";
 import { User } from "../models/User.js";
+import { cartRepository } from "../repositories/cart.repository.js";
 
 dotenv.config();
 
@@ -17,10 +18,13 @@ export function initializePassport() {
       { passReqToCallback: true, usernameField: "email" },
       async (req, _u, _p, done) => {
         try {
-          const { firstName, lastName, email, age, password, role } = req.body;
+          const { firstName, lastName, email, age, password, role, cid } =
+            req.body;
           const context = "passport";
           const user = await userRepository.getUserByEmail(email, context);
           if (user) {
+            const deletedCart = await cartRepository.deleteFullCartById(cid);
+            console.log(deletedCart);
             return done(null, false);
           }
           const newUser = new User(
@@ -29,7 +33,8 @@ export function initializePassport() {
             email,
             age,
             createHash(password),
-            role
+            role,
+            cid
           );
           const res = await userRepository.postUser(newUser);
           return done(null, res);

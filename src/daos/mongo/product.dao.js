@@ -75,7 +75,7 @@ class ProductDao {
 
   async deleteProductById(pid) {
     try {
-      const res = productModel.findByIdAndDelete(pid).lean();
+      const res = await productModel.findByIdAndDelete(pid).lean();
       return res;
     } catch (err) {
       throw new ServerError(err.message);
