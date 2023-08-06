@@ -16,6 +16,7 @@ import { productsApiRouter } from "../routes/api/products.router.js";
 import { sessionsApiRouter } from "../routes/api/sessions.router.js";
 import { usersApiRouter } from "../routes/api/users.router.js";
 import { mockingApiRouter } from "../routes/api/mocking.router.js";
+import { paymentsApiRouter } from "../routes/api/payments.router.js";
 
 // View imports
 import { cartsViewsRouter } from "../routes/web/carts.router.js";
@@ -85,6 +86,10 @@ process.env.NODE_ENV === "TEST"
 process.env.NODE_ENV === "TEST"
   ? app.use("/api/users", usersApiRouter)
   : app.use("/api/users", authenticate, usersApiRouter);
+
+process.env.NODE_ENV === "TEST"
+  ? app.use("/api/payments", paymentsApiRouter)
+  : app.use("/api/payments", authenticate, paymentsApiRouter);
 
 app.use("/api/mock/products", mockingApiRouter);
 

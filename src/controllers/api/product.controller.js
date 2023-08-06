@@ -1,9 +1,9 @@
 import { productRepository } from "../../repositories/product.repository.js";
 
 import {
-  ServerError,
+  InternalServerError,
   NotFoundError,
-  ClientError,
+  BadRequestError,
 } from "../../errors/errors.js";
 
 /**
@@ -79,7 +79,7 @@ export async function putProduct(req, res, next) {
     const product = req.body;
     const updatedProduct = await productRepository.putProduct(pid, product);
     if (!updatedProduct) {
-      return next(new ClientError("Client Error"));
+      return next(new BadRequestError("Client Error"));
     }
     res.status(200).json({ body: updatedProduct });
   } catch (error) {
@@ -97,7 +97,7 @@ export async function deleteProductById(req, res, next) {
     const pid = req.params.pid;
     const deletedProduct = await productRepository.deleteProductById(pid);
     if (!deletedProduct) {
-      return next(new ClientError("Client Error"));
+      return next(new BadRequestError("Client Error"));
     }
     res.status(200).json({ body: deletedProduct });
   } catch (error) {

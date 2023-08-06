@@ -1,6 +1,6 @@
 // Faker import
 import { faker } from "@faker-js/faker";
-import { ServerError } from "../errors/errors.js";
+import { InternalServerError } from "../errors/errors.js";
 
 class MockingService {
   async getMockedData() {
@@ -22,12 +22,12 @@ class MockingService {
       }
 
       if (products.length === 0) {
-        throw new ServerError("No products found");
+        throw new InternalServerError("No products found");
       }
 
       return products;
     } catch (err) {
-      console.error("Error in getMockedData:", err);
+      console.error("Error in getMockedData Service:", err);
       throw err;
     }
   }

@@ -1,10 +1,10 @@
 // CUSTOM ERRORS
 
 // HTTP CODES
-export class ClientError extends Error {
+export class BadRequestError extends Error {
   constructor(message) {
     super(message);
-    this.name = "Client Error";
+    this.name = "Bad Request Error";
   }
 }
 export class NotFoundError extends Error {
@@ -13,10 +13,10 @@ export class NotFoundError extends Error {
     this.name = "Not Found Error";
   }
 }
-export class ServerError extends Error {
+export class InternalServerError extends Error {
   constructor(message) {
     super(message);
-    this.name = "Server Error";
+    this.name = "Internal Server Error";
   }
 }
 

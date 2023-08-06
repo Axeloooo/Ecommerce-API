@@ -1,9 +1,9 @@
 import { userRepository } from "../../repositories/user.repository.js";
 
 import {
-  ClientError,
+  BadRequestError,
   NotFoundError,
-  ServerError,
+  InternalServerError,
 } from "../../errors/errors.js";
 
 export async function postRegister(req, res, next) {
@@ -11,7 +11,7 @@ export async function postRegister(req, res, next) {
     const { cid } = req.body;
     res.status(200).json(cid);
   } catch (error) {
-    return next(new ServerError("Server Error"));
+    return next(new InternalServerError("Server Error"));
   }
 }
 
@@ -30,7 +30,7 @@ export async function postLogin(req, res, next) {
     };
     res.status(200).json(user.cid);
   } catch (error) {
-    return next(new ServerError("Server Error"));
+    return next(new InternalServerError("Server Error"));
   }
 }
 
@@ -38,7 +38,7 @@ export async function postLogout(req, res, next) {
   try {
     req.logout((error) => {
       if (error) {
-        return next(new ClientError("Client Error"));
+        return next(new BadRequestError("Client Error"));
       } else {
         res.status(200).json({
           statusCode: 200,
@@ -53,7 +53,7 @@ export async function postLogout(req, res, next) {
       }
     });
   } catch (error) {
-    return next(new ServerError("Server Error"));
+    return next(new InternalServerError("Server Error"));
   }
 }
 
@@ -62,6 +62,6 @@ export async function postGitHubLogin(req, res, next) {
     req.session.user = req.user;
     res.status(200).redirect("/products");
   } catch (err) {
-    return next(new ServerError("Server Error"));
+    return next(new InternalServerError("Server Error"));
   }
 }

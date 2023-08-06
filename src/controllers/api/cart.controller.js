@@ -2,9 +2,9 @@ import { cartRepository } from "../../repositories/cart.repository.js";
 import { cartService } from "../../services/cart.service.js";
 
 import {
-  ServerError,
+  InternalServerError,
   NotFoundError,
-  ClientError,
+  BadRequestError,
 } from "../../errors/errors.js";
 
 export async function getCarts(req, res, next) {
@@ -15,7 +15,7 @@ export async function getCarts(req, res, next) {
     }
     res.status(200).json(carts);
   } catch (err) {
-    return next(new ServerError("Server Error"));
+    return next(new InternalServerError("Server Error"));
   }
 }
 
@@ -28,7 +28,7 @@ export async function getCartById(req, res, next) {
     }
     res.status(200).json(cart);
   } catch (err) {
-    return next(new ServerError("Server Error"));
+    return next(new InternalServerError("Server Error"));
   }
 }
 
@@ -36,11 +36,11 @@ export async function postCart(req, res, next) {
   try {
     const cart = await cartRepository.postCart();
     if (!cart) {
-      return next(new ClientError("Client Error"));
+      return next(new BadRequestError("Client Error"));
     }
     res.status(201).json(cart);
   } catch (err) {
-    return next(new ServerError("Server Error"));
+    return next(new InternalServerError("Server Error"));
   }
 }
 
@@ -54,7 +54,7 @@ export async function postProductInCartById(req, res, next) {
     }
     res.status(201).json(product);
   } catch (err) {
-    return next(new ServerError("Server Error"));
+    return next(new InternalServerError("Server Error"));
   }
 }
 
@@ -66,7 +66,7 @@ export async function postPurchase(req, res, next) {
     }
     res.status(201).json(receipt);
   } catch (err) {
-    return next(new ServerError("Server Error"));
+    return next(new InternalServerError("Server Error"));
   }
 }
 
@@ -76,11 +76,11 @@ export async function putCartById(req, res, next) {
     const data = req.body;
     const cart = await cartRepository.putCartById(cid, data);
     if (!cart) {
-      return next(new ClientError("Client Error"));
+      return next(new BadRequestError("Client Error"));
     }
     res.status(200).json(cart);
   } catch (err) {
-    return next(new ServerError("Server Error"));
+    return next(new InternalServerError("Server Error"));
   }
 }
 
@@ -95,7 +95,7 @@ export async function putProductInCartById(req, res, next) {
     }
     res.status(200).json(product);
   } catch (err) {
-    return next(new ServerError("Server Error"));
+    return next(new InternalServerError("Server Error"));
   }
 }
 
@@ -108,7 +108,7 @@ export async function deleteCartById(req, res, next) {
     }
     res.status(200).json(cart);
   } catch (err) {
-    return next(new ServerError("Server Error"));
+    return next(new InternalServerError("Server Error"));
   }
 }
 
@@ -122,6 +122,6 @@ export async function deleteProductInCartById(req, res, next) {
     }
     res.status(200).json(product);
   } catch (err) {
-    return next(new ServerError("Server Error"));
+    return next(new InternalServerError("Server Error"));
   }
 }
