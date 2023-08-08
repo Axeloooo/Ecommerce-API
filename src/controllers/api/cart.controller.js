@@ -32,6 +32,18 @@ export async function getCartById(req, res, next) {
   }
 }
 
+export async function getTicketsByEmail(req, res, next) {
+  try {
+    const response = await cartService.getTicketsByEmail(req);
+    if (!response) {
+      throw new InternalServerError("Error retrieving tickets.");
+    }
+    res.status(200).json(response);
+  } catch (err) {
+    next(err);
+  }
+}
+
 export async function postCart(req, res, next) {
   try {
     const cart = await cartRepository.postCart();

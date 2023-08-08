@@ -16,6 +16,10 @@ class TicketRepository {
     }
   }
 
+  async getTicketsByEmail(email) {
+    return this.#ticketDao.getTicketsByEmail(email);
+  }
+
   async postTicket(ticket) {
     try {
       const ticketCreated = await this.#ticketDao.postTicket(ticket);

@@ -13,6 +13,8 @@ cartsApiRouter.post("/:cid/product/:pid", cartController.postProductInCartById);
 
 cartsApiRouter.post("/:cid/purchase", cartController.postPurchase);
 
+cartsApiRouter.get("/profile/receipts", cartController.getTicketsByEmail);
+
 cartsApiRouter.put("/:cid", cartController.putCartById);
 
 cartsApiRouter.put("/:cid/product/:pid", cartController.putProductInCartById);

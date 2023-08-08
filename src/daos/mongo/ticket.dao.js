@@ -16,6 +16,16 @@ class TicketDao {
     }
   }
 
+  async getTicketsByEmail(email) {
+    try {
+      const res = await this.#ticketModel.find({ purchaser: email });
+      return res;
+    } catch (err) {
+      console.error("Error in getTicketByEmail", err);
+      throw err;
+    }
+  }
+
   async postTicket(ticket) {
     try {
       const ticketCreated = await this.#ticketModel.create({
