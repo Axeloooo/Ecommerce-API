@@ -1,10 +1,6 @@
 import { productRepository } from "../../repositories/product.repository.js";
 
-import {
-  InternalServerError,
-  NotFoundError,
-  BadRequestError,
-} from "../../errors/errors.js";
+import { NotFoundError, BadRequestError } from "../../errors/errors.js";
 
 /**
  *  @desc   Get products
