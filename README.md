@@ -1,7 +1,13 @@
 [![CI](https://github.com/Axeloooo/eCommerce-Backend/actions/workflows/ci.yml/badge.svg)](https://github.com/Axeloooo/eCommerce-Backend/actions/workflows/ci.yml) ![Website](https://img.shields.io/website?url=https%3A%2F%2Fecommerce-api-production-c90c.up.railway.app%2F&logo=railway) ![GitHub pull requests](https://img.shields.io/github/issues-pr/Axeloooo/Ecommerce-API?logo=github)
  ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/t/Axeloooo/Ecommerce-API?logo=github) ![GitHub contributors](https://img.shields.io/github/contributors/Axeloooo/Ecommerce-API?logo=github) ![GitHub tag (with filter)](https://img.shields.io/github/v/tag/Axeloooo/Ecommerce-API?logo=Github) ![GitHub](https://img.shields.io/github/license/Axeloooo/Ecommerce-API?logo=github)
 
-<br>
+# Ecommerce API - Game Heaven 🎮
+
+<div align="center">
+  <img src="https://github.com/Axeloooo/Ecommerce-API/assets/106788226/89bcaf74-f2b1-400c-bd09-976c55110cd9.gif" alt="gif">
+</div>
+
+## Tech Stack 👨🏼‍💻
 
 ![express](https://img.shields.io/badge/Express-000000.svg?style=for-the-badge&logo=Express&logoColor=white)
 ![mongodb](https://img.shields.io/badge/MongoDB-47A248.svg?style=for-the-badge&logo=MongoDB&logoColor=white)
@@ -17,13 +23,6 @@
 ![npm](https://img.shields.io/badge/npm-CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
 ![git](https://img.shields.io/badge/Git-F05032.svg?style=for-the-badge&logo=Git&logoColor=white)
 ![macos](https://img.shields.io/badge/macOS-000000.svg?style=for-the-badge&logo=macOS&logoColor=white)
-
-
-# Ecommerce API - Game Heaven 🎮
-
-<div align="center">
-  <img src="https://github.com/Axeloooo/Ecommerce-API/assets/106788226/89bcaf74-f2b1-400c-bd09-976c55110cd9.gif" alt="gif">
-</div>
 
 ## Quickstart ⚡️
 
